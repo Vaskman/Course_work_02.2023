@@ -1,70 +1,60 @@
+import java.util.Arrays;
 public class Main {
     public static void printSeparate() {
         System.out.println("*****************************************");
     }
-    public static void printEmployee(Employee[]employees){
-        for (int i = 0; i < employees.length; i++) {
-            if (i== employees.length){
-                System.out.println(employees[i]);
-            }
-            System.out.println(employees[i]+" ");
+    static Employee [] employees = new Employee[10];
+    private static void printEmployee(){
+        for (Employee emp :employees) {
+            System.out.println(emp);
         }
     }
-    public static void printNames(Employee[]employees){
-        for (Employee names:employees){
-            if(names!=null){
-                System.out.println(names.getLastName()+" "+names.getFirstName()+" "+names.getSurName());
+    private static void printNames(){
+        for (Employee emp:employees){
+            if(emp!=null){
+                System.out.println(emp.getLastName()+" "+emp.getFirstName()+" "+emp.getSurName());
             }
         }
     }
-    public static void amountOfSalaries(Employee[]employees) {
+    private static void amountOfSalaries() {
         double sum=0;
-        for(Employee salaries :employees){
-            if(salaries!=null){
-                if (salaries.getSalaries()>0){
-                    sum=sum+ salaries.getSalaries();
+        for(Employee emp :employees){
+            sum=sum+ emp.getSalaries();
+                }
+        System.out.println("Общая сумма зарплат:"+sum);
+        }
+    public static void maximumAmount() {
+        Employee empMaxSalary=null;
+        for(Employee emp :employees){
+            if(emp!=null){
+                if(empMaxSalary==null||emp.getSalaries()>empMaxSalary.getSalaries()){
+                    empMaxSalary=emp;
                 }
             }
         }
-        System.out.println("Общая сумма: "+sum);
+        System.out.println("Сотрудник с максимальной зарплатой "+empMaxSalary);
     }
-    public static void maximumAmount(Employee[]employees) {
-        double sum =1;
-        for(Employee salaries :employees){
-            if(salaries!=null){
-                if(salaries.getSalaries()>sum){
-                    sum=salaries.getSalaries();
+    public static void minimumAmount(){
+        Employee empMinSalary=null;
+        for(Employee emp : employees){
+            if(emp!=null){
+                if(empMinSalary==null|| emp.getSalaries()<empMinSalary.getSalaries()){
+                    empMinSalary=emp;
                 }
             }
         }
-        System.out.println("Максимальная сумма: "+sum);
+        System.out.println("Сотрудник с минимальной зарплатой: "+ empMinSalary);
     }
-    public static void minimumAmount(Employee[]employees){
-        double sum = 300_000;
-        for(Employee salaries : employees){
-            if(salaries!=null){
-                if(sum>salaries.getSalaries()){
-                    sum=salaries.getSalaries();
-                }
-            }
-        }
-        System.out.println("Минимальная сумма: "+sum);
-    }
-    public static void averageAmount(Employee[]employees) {
+    public static void averageAmount() {
         double sum =0;
         double amount= employees.length;
-        for(Employee salaries :employees){
-            if(salaries!=null){
-                if(salaries.getSalaries()>0){
-                    sum=sum+salaries.getSalaries();
-                    amount=sum/ employees.length;
+        for(Employee emp :employees){
+            sum+=emp.getSalaries();
+            amount=sum/ employees.length;
                 }
+        System.out.println("Средняя сумма зарплат: "+amount);
             }
-        }
-        System.out.println("Средняя сумма: "+amount);
-    }
     public static void main(String[] args) {
-        Employee[]employees=new Employee[10];
         employees[0]=new Employee("Иванов","Иван","Иванович",1,33000);
         employees[1]=new Employee("Петров","Петр","Петрович",2,35000);
         employees[2]=new Employee("Сидоров","Сидор","Сидорович",3,43000);
@@ -76,19 +66,17 @@ public class Main {
         employees[8]=new Employee("Александрова","Оксана","Александровна",4,53000);
         employees[9]=new Employee("Антонова","Людмила","Антоновна",5,44000);
         printSeparate();
-        printEmployee(employees);
+        printEmployee();
         printSeparate();
-        printNames(employees);
+        printNames();
         printSeparate();
-        amountOfSalaries(employees);
+        amountOfSalaries();
         printSeparate();
-        maximumAmount(employees);
+        maximumAmount();
         printSeparate();
-        minimumAmount(employees);
+        minimumAmount();
         printSeparate();
-        averageAmount(employees);
+        averageAmount();
         printSeparate();
-
-
     }
 }
